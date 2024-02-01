@@ -44,6 +44,7 @@ const Dashboard = () => {
       <div className="logout-button-container">
         <button onClick={handleLogout}>Logout</button>
       </div>
+      <h1 style={{textAlign:'center'}}><i>site is under the development</i></h1>
     </div>
   );
 };

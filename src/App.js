@@ -17,6 +17,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
+        <h1 style={{textAlign:'center'}}><i>site is under the development</i></h1>
         <Footer />
       </div>
     </BrowserRouter>
