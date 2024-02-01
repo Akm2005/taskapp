@@ -1,0 +1,53 @@
+/* Default styling for larger screens */
+.form1 {
+    width: 30%;
+    height: 300px;
+    margin: 10px auto; /* Center the form horizontally */
+    
+    background-color: rgb(230, 193, 145);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+input {
+    margin: 10px;
+    width: 94%;
+    height: 40px;
+}
+
+.user {
+    text-align: center;
+    margin-bottom: 10px;
+    height: 80px;
+}
+
+.btn {
+    margin: 10px;
+    width: 94%;
+}
+
+.a {
+    margin: 10px;
+    width: auto;
+    font-size: 12px;
+}
+a{
+    text-decoration: none;
+}
+
+/* Media query for smaller screens (e.g., mobile devices) */
+@media only screen and (max-width: 600px) {
+    .form1 {
+        width: 90%; /* Adjust the width for smaller screens */
+        margin: 10% auto; /* Center the form horizontally and provide some top margin */
+    }
+
+    input {
+        width: 100%; /* Make the input fields take up the full width */
+    }
+    .a {
+        font-size: 10px; /* Adjust font size for smaller screens */
+        text-decoration: none;
+    }
+    
+}

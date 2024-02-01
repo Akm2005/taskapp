@@ -1,0 +1,54 @@
+/* Default styling for larger screens */
+.form1 {
+    width: 30%;
+    height: auto;
+    margin: 10px;
+    margin-top: 5%;
+    margin-left: 35%;
+    background-color: rgb(230, 193, 145);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+input {
+    margin: 10px;
+    width: 94%;
+    height: 40px;
+    border: 1px solid blue;
+    border-radius: 5px;
+    outline: none;
+}
+
+.user {
+    text-align: center;
+    margin-bottom: 10px;
+    height: 80px;
+}
+
+.btn {
+    margin: 10px;
+    width: 94%;
+}
+
+.a {
+    margin: 10px;
+    width: auto;
+   display: flex;
+   justify-content: space-between;
+    font-size: 12px;
+}
+a{
+    text-decoration: none;
+   
+}
+/* Media query for smaller screens (e.g., mobile devices) */
+@media only screen and (max-width: 600px) {
+    .form1 {
+        width: 90%; /* Adjust the width for smaller screens */
+        margin-left: 5%; /* Adjust the left margin for centering on smaller screens */
+    }
+    .a {
+        font-size: 10px;
+        text-decoration: none; /* Adjust font size for smaller screens */
+    }
+}
