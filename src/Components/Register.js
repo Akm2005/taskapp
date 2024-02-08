@@ -10,8 +10,7 @@ const Register = () => {
   const navigate = useNavigate();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const [name, setname] = useState("");
-  const [contact, setcontact] = useState("");
+ 
 
   const handleSubmit = async (e) => {
     try {
@@ -43,16 +42,7 @@ const Register = () => {
         <div className="user">
           <i className="fa fa-user fa-5x" style={{ color: "#80b3ff" }}></i>
         </div>
-        <input
-          type="text"
-          placeholder="Enter Name"
-          name="name"
-          value={name}
-          onChange={(e) => {
-            setname(e.target.value);
-          }}
-          required
-        />
+       
         <br />
         <input
           type="email"
@@ -61,17 +51,6 @@ const Register = () => {
           value={email}
           onChange={(e) => {
             setemail(e.target.value);
-          }}
-          required
-        />
-        <br />
-        <input
-          type="tel"
-          placeholder="Enter Contact"
-          name="contact"
-          value={contact}
-          onChange={(e) => {
-            setcontact(e.target.value);
           }}
           required
         />

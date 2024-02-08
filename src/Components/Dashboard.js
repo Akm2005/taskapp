@@ -1,52 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import { auth } from "../auth.js";
+import React, { useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { auth, db } from '../auth';
 import { signOut } from 'firebase/auth';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import './Dashboard.css'; // Import your CSS file for styling
+import './Dashboard.css';
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      // This function will be called whenever the authentication state changes
-      if (user) {
-        // User is signed in
-        setUser(user);
-      } else {
-        // User is signed out
-        setUser(null);
-      }
-    });
+    const handleSignOut = async () => {
+        try {
+            await signOut(auth);
+            navigate('/');
+        } catch (error) {
+            console.error('Error signing out:', error);
+        }
+    };
 
-    // Clean up the subscription when the component unmounts
-    return () => unsubscribe();
-  }, []); // Only run this effect once, when the component mounts
+    const handleFetchUser = async () => {
+        try {
+            setLoading(true);
+            const querySnapshot = await getDocs(collection(db, 'user' ));
+            querySnapshot.forEach(doc => {
+                setUser(doc.data()); // Assuming doc.data() returns an object containing user information
+            });
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      toast.success('Signout successful');
-      window.sessionStorage.clear();
-      navigate('/');
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
-  return (
-    <div className="dashboard-container">
-      <div className="welcome-message">
-        {user ? `Welcome ${user.email}!` : 'Welcome!'}
-      </div>
-      <div className="logout-button-container">
-        <button onClick={handleLogout}>Logout</button>
-      </div>
-      <h1 style={{textAlign:'center'}}><i>site is under the development</i></h1>
-    </div>
-  );
+    return (
+        <div>
+            <h1>Welcome to Dashboard</h1>
+            {loading ? (
+                <p>Loading user data...</p>
+            ) : (
+                <div>
+                    {user ? (
+                        <div>
+                            <h2>Name: {user.name}</h2> {/* Assuming 'name' is a field in the user data */}
+                            {/* Display other user information as needed */}
+                        </div>
+                    ) : (<div>
+                        <p>No user data available</p>
+                        <p><i>site under the development!</i></p>
+                        </div>
+                    )}
+                    <button onClick={handleFetchUser}>Check User Data</button>
+                    <button onClick={handleSignOut}>Logout</button>
+                </div>
+            )}
+        </div>
+    );
 };
 
 export default Dashboard;
